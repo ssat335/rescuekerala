@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
 districts = (
     ('alp','Alappuzha - ആലപ്പുഴ'),
@@ -140,7 +141,7 @@ class NGO(models.Model):
     organisation_type = models.CharField(max_length=250, verbose_name="Type of Organization")
     organisation_address = models.TextField(default='', verbose_name="Address of Organization")
     name = models.CharField(max_length=100, verbose_name="Contact Person")
-    phone = models.CharField(max_length=10)
+    phone = PhoneNumberField(verbose_name="Phone (eg +911234567890)")
     description = models.TextField(verbose_name="About Organisation")
     area = models.TextField(
         verbose_name = "Area of volunteering"

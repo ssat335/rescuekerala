@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'django_filters',
     'raven.contrib.django.raven_compat',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

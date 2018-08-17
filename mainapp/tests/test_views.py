@@ -124,7 +124,7 @@ class RegisterVolunteerViewTests(TestCase):
         post_data = {
             'name': 'Rag Sagar',
             'district': 'alp',
-            'phone': '8893845901',
+            'phone': '+918893845901',
             'organisation': 'smc',
             'area': 'plw',
             'address': 'Near mosque'
@@ -135,7 +135,7 @@ class RegisterVolunteerViewTests(TestCase):
         volunteer = Volunteer.objects.last()
         self.assertEqual(volunteer.name, 'Rag Sagar')
         self.assertEqual(volunteer.district, 'alp')
-        self.assertEqual(volunteer.phone, '8893845901')
+        self.assertEqual(volunteer.phone, '+918893845901')
         self.assertEqual(volunteer.organisation, 'smc')
         self.assertEqual(volunteer.area, 'plw')
         self.assertEqual(volunteer.address, 'Near mosque')
@@ -167,7 +167,7 @@ class RegisterContributorViewTests(TestCase):
         post_data = {
             'name': 'Rag Sagar',
             'district': 'pkd',
-            'phone': '8893845901',
+            'phone': '+918893845901',
             'address': 'Near Mosque',
             'commodities': 'Shirts, Torches'
         }
@@ -177,5 +177,5 @@ class RegisterContributorViewTests(TestCase):
         contributor = Contributor.objects.last()
         self.assertEqual(contributor.name, 'Rag Sagar')
         self.assertEqual(contributor.district, 'pkd')
-        self.assertEqual(contributor.phone, '8893845901')
+        self.assertEqual(contributor.phone, '+918893845901')
         self.assertEqual(contributor.address, 'Near Mosque')

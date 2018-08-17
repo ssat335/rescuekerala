@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
 districts = (
     ('alp','Alappuzha - ആലപ്പുഴ'),
@@ -116,7 +117,7 @@ class Volunteer(models.Model):
         choices = districts,
     )
     name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=10)
+    phone = PhoneNumberField(verbose_name="Phone (eg +919898989899)")
     organisation = models.CharField(max_length=250, verbose_name="Organization (സംഘടന) / Institution")
     address = models.TextField()
     area = models.CharField(
@@ -140,7 +141,7 @@ class NGO(models.Model):
     organisation_type = models.CharField(max_length=250, verbose_name="Type of Organization")
     organisation_address = models.TextField(default='', verbose_name="Address of Organization")
     name = models.CharField(max_length=100, verbose_name="Contact Person")
-    phone = models.CharField(max_length=10)
+    phone = PhoneNumberField(verbose_name="Phone (eg +919898989899)")
     description = models.TextField(verbose_name="About Organisation")
     area = models.TextField(
         verbose_name = "Area of volunteering"
@@ -162,7 +163,7 @@ class Contributor(models.Model):
         choices = districts,
     )
     name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=10)
+    phone = PhoneNumberField(verbose_name="Phone (eg +919898989899)")
     address = models.TextField()
     commodities = models.TextField(verbose_name="What you can contribute. ( സംഭാവന ചെയ്യാന്‍ ഉദ്ദേശിക്കുന്ന സാധനങ്ങള്‍ ) -- Eg: Shirts, torches etc ")
     status = models.CharField(
@@ -181,7 +182,7 @@ class DistrictManager(models.Model):
         choices = districts,
     )
     name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=11)
+    phone = PhoneNumberField(verbose_name="Phone (eg +919898989899)")
     email = models.CharField(max_length=100)
 
     def __str__(self):

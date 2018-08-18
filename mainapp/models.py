@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
 districts = (
     ('alp','Alappuzha - ആലപ്പുഴ'),
@@ -59,7 +60,7 @@ class Request(models.Model):
     )
     location = models.CharField(max_length=500,verbose_name='Location - സ്ഥലം')
     requestee = models.CharField(max_length=100,verbose_name='Requestee - അപേക്ഷകന്‍റെ പേര്')
-    requestee_phone = models.CharField(max_length=10,verbose_name='Requestee Phone - അപേക്ഷകന്‍റെ ഫോണ്‍ നമ്പര്‍')
+    requestee_phone = models.CharField(max_length=15,verbose_name='Requestee Phone - അപേക്ഷകന്‍റെ ഫോണ്‍ നമ്പര്‍', blank=True)
     latlng = models.CharField(max_length=100, verbose_name='GPS Coordinates - GPS നിർദ്ദേശാങ്കങ്ങൾ ', blank=True)
     latlng_accuracy = models.CharField(max_length=100, verbose_name='GPS Accuracy - GPS കൃത്യത ', blank=True)
     is_request_for_others = models.BooleanField(verbose_name='Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു  ', default=False)
@@ -116,7 +117,7 @@ class Volunteer(models.Model):
         choices = districts,
     )
     name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=10)
+    phone = PhoneNumberField(max_length=15, verbose_name="Phone (eg +919898989899)")
     organisation = models.CharField(max_length=250, verbose_name="Organization (സംഘടന) / Institution")
     address = models.TextField()
     area = models.CharField(
@@ -140,7 +141,7 @@ class NGO(models.Model):
     organisation_type = models.CharField(max_length=250, verbose_name="Type of Organization")
     organisation_address = models.TextField(default='', verbose_name="Address of Organization")
     name = models.CharField(max_length=100, verbose_name="Contact Person")
-    phone = models.CharField(max_length=10)
+    phone = PhoneNumberField(max_length=15, verbose_name="Phone (eg +919898989899)")
     description = models.TextField(verbose_name="About Organisation")
     area = models.TextField(
         verbose_name = "Area of volunteering"
@@ -162,7 +163,7 @@ class Contributor(models.Model):
         choices = districts,
     )
     name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=10)
+    phone = PhoneNumberField(max_length=15,verbose_name="Phone (eg +919898989899)")
     address = models.TextField()
     commodities = models.TextField(verbose_name="What you can contribute. ( സംഭാവന ചെയ്യാന്‍ ഉദ്ദേശിക്കുന്ന സാധനങ്ങള്‍ ) -- Eg: Shirts, torches etc ")
     status = models.CharField(
@@ -181,7 +182,7 @@ class DistrictManager(models.Model):
         choices = districts,
     )
     name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=11)
+    phone = PhoneNumberField(max_length=15, verbose_name="Phone (eg +919898989899)")
     email = models.CharField(max_length=100)
 
     def __str__(self):
@@ -235,7 +236,7 @@ class RescueCamp(models.Model):
 
 class Person(models.Model):
     name = models.CharField(max_length=30,blank=False,null=False,verbose_name="Name - പേര്")
-    phone = models.CharField(max_length=11,null=True,blank=True,verbose_name='Mobile - മൊബൈൽ')
+    phone = models.CharField(max_length=15,null=True,blank=True,verbose_name='Mobile - മൊബൈൽ')
     age = models.IntegerField(null=True,blank=True,verbose_name="Age - പ്രായം")
     gender = models.IntegerField(
         choices = gender,

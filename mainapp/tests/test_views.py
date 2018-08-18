@@ -65,7 +65,6 @@ class RequestViewTests(TestCase):
         self.assertTemplateUsed(response, 'mainapp/request_form.html')
         self.assertFormError(response, 'form', 'district', 'This field is required.')
         self.assertFormError(response, 'form', 'location', 'This field is required.')
-        self.assertFormError(response, 'form', 'requestee_phone', 'This field is required.')
         self.assertFormError(response, 'form', 'requestee', 'This field is required.')
         post_data = {
             'requestee_phone': '3234343434934'
@@ -73,7 +72,7 @@ class RequestViewTests(TestCase):
         response = client.post(self.url, post_data)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'mainapp/request_form.html')
-        self.assertFormError(response, 'form', 'requestee_phone', 'Ensure this value has at most 10 characters (it has 13).')
+        # self.assertFormError(response, 'form', 'requestee_phone', 'Ensure this value has at most 10 characters (it has 13).')
 
     def test_creating_request(self):
         client = Client()
@@ -124,7 +123,7 @@ class RegisterVolunteerViewTests(TestCase):
         post_data = {
             'name': 'Rag Sagar',
             'district': 'alp',
-            'phone': '8893845901',
+            'phone': '+918893845901',
             'organisation': 'smc',
             'area': 'plw',
             'address': 'Near mosque'
@@ -135,7 +134,7 @@ class RegisterVolunteerViewTests(TestCase):
         volunteer = Volunteer.objects.last()
         self.assertEqual(volunteer.name, 'Rag Sagar')
         self.assertEqual(volunteer.district, 'alp')
-        self.assertEqual(volunteer.phone, '8893845901')
+        self.assertEqual(volunteer.phone, '+918893845901')
         self.assertEqual(volunteer.organisation, 'smc')
         self.assertEqual(volunteer.area, 'plw')
         self.assertEqual(volunteer.address, 'Near mosque')
@@ -167,7 +166,7 @@ class RegisterContributorViewTests(TestCase):
         post_data = {
             'name': 'Rag Sagar',
             'district': 'pkd',
-            'phone': '8893845901',
+            'phone': '+918893845901',
             'address': 'Near Mosque',
             'commodities': 'Shirts, Torches'
         }
@@ -177,5 +176,5 @@ class RegisterContributorViewTests(TestCase):
         contributor = Contributor.objects.last()
         self.assertEqual(contributor.name, 'Rag Sagar')
         self.assertEqual(contributor.district, 'pkd')
-        self.assertEqual(contributor.phone, '8893845901')
+        self.assertEqual(contributor.phone, '+918893845901')
         self.assertEqual(contributor.address, 'Near Mosque')

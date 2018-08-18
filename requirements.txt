@@ -9,3 +9,4 @@ pytz==2018.5
 raven==6.9.0
 whitenoise==4.0
 django-redis==4.9.0
+django-phonenumber-field==2.0.0
